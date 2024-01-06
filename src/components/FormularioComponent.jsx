@@ -1,7 +1,11 @@
 
+import { useRef  } from "react"
 import { useForm } from "../hooks/useForm"
+import { useEffect } from "react"
 
 export const FormularioComponent = () => {
+
+    const focusRef = useRef()
     const InicialForm = {
         userName: "",
         email: "",
@@ -13,11 +17,18 @@ export const FormularioComponent = () => {
         event.preventDefault()
         console.log(formState)
     }
+
+    useEffect(() => {
+      focusRef.current.focus()
+    }, [])
+    
+
     return (
         <form onSubmit={onSubmit}>
             <div className="form-group">
                 <label htmlFor="userName">Usuario</label>
                 <input
+                    ref = {focusRef}
                     type="text"  // Cambiado de "email" a "text"
                     className="form-control"
                     name="userName"
